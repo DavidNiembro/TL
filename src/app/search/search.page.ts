@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-search',
@@ -9,9 +10,9 @@ import { RestApiService } from '../rest-api.service';
 })
 export class SearchPage implements OnInit {
 
-  classrooms: any;
+  stations: any;
 
-  constructor(public api: RestApiService, public loadingController: LoadingController) { 
+  constructor(public api: RestApiService, public loadingController: LoadingController,private modalController: ModalController) { 
   }
 
   ngOnInit() {
@@ -20,18 +21,21 @@ export class SearchPage implements OnInit {
 
 
   async search(event) {
-    if(event.srcElement.value!=""){
-    const loading = await this.loadingController.create();
-    //await loading.present();
-    await this.api.getBusStationById(event.srcElement.value)
-      .subscribe(res => {
-        console.log(res);
-        this.classrooms = res.stations;
-        //loading.dismiss();
-      }, err => {
-        console.log(err);
-        //loading.dismiss();
-      });
+    if(event!= "" || event.srcElement.value!=""){
+      const loading = await this.loadingController.create();
+      //await loading.present();
+      await this.api.getBusStationById(event.srcElement.value)
+        .subscribe(res => {
+          console.log(res);
+          this.stations = res.stations;
+          //loading.dismiss();
+        }, err => {
+          console.log(err);
+          //loading.dismiss();
+        });
+    }
   }
+  add(station){
+       this.modalController.dismiss(station);
   }
 }

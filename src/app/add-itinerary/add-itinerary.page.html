@@ -5,6 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <a routerLink="/search">Ajouter l'arrêt de départ</a>
-  <a routerLink="/search">Ajouter l'arrêt d'arrivée</a>
+  <ul>
+    <li>
+      <ion-card (click)="goToSearch()">
+        <ion-card-header>
+          <ion-card-subtitle>Ajouter l'arrêt de départ</ion-card-subtitle>
+          <ion-card-title>{{start}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </li>
+    <li>
+      <ion-card (click)="goToSearchEnd()">
+        <ion-card-header>
+          <ion-card-subtitle>Ajouter l'arrêt d'arrivée</ion-card-subtitle>
+          <ion-card-title>{{end}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </li>
+  </ul>
 </ion-content>

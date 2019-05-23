@@ -9,7 +9,12 @@
 <ion-content>
   <ul>
     <li>
-      <a routerLink="/add-itinerary">Ajouter un itinéraire</a>
+        <ion-card (click)="goToItinerary()">
+            <ion-card-header>
+              <ion-card-subtitle>Ajouter un itinéraire</ion-card-subtitle>
+              <ion-card-title></ion-card-title>
+            </ion-card-header>
+          </ion-card>
     </li>
     <li>
       <ion-card>

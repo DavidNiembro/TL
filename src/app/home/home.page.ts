@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {DataProvider} from '../../providers/data'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,11 @@ export class HomePage {
   
   public data : DataProvider
    
-    constructor(){
+    constructor(private router :Router){
       this.data = new DataProvider();
+    }
+
+    goToItinerary(){
+      this.router.navigate(['/add-itinerary']);
     }
 }
