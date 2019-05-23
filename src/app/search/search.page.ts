@@ -15,17 +15,15 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
-    this.search();
+    this.search('');
   }
 
 
   async search(event) {
     if(event.srcElement.value!=""){
-    const loading = await this.loadingController.create({
-      content: 'Loading'
-    });
+    const loading = await this.loadingController.create();
     //await loading.present();
-    await this.api.getClassroomById(event)
+    await this.api.getClassroomById(event.srcElement.value)
       .subscribe(res => {
         console.log(res);
         this.classrooms = res.stations;
