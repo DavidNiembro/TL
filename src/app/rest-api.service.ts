@@ -35,7 +35,7 @@ export class RestApiService {
     return body || { };
   }
 
-  getClassroomById(id: string): Observable<any> {
+  getBusStationById(id: string): Observable<any> {
     const url = `${apiUrl}locations?query=${id}&type=station`;
     return this.http.get(url).pipe(
       map(this.extractData),
