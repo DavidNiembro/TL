@@ -1,26 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addItinerary</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button text="Retour">
+          </ion-back-button>
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ul>
-    <li>
-      <ion-card (click)="goToSearch()">
-        <ion-card-header>
-          <ion-card-subtitle>Ajouter l'arrêt de départ</ion-card-subtitle>
-          <ion-card-title>{{start}}</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </li>
-    <li>
-      <ion-card (click)="goToSearchEnd()">
-        <ion-card-header>
-          <ion-card-subtitle>Ajouter l'arrêt d'arrivée</ion-card-subtitle>
-          <ion-card-title>{{end}}</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </li>
-  </ul>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h1>Choisissez un itinéraire</h1>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h2>Depuis</h2>
+        <div *ngIf = " start ; else elsestart">
+            <h1>{{start.name}}</h1>
+        </div>
+        <ng-template #elsestart>
+          <p (click)="goToSearch()">+</p>
+        </ng-template>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h2>Vers</h2>
+        <div *ngIf = "end; else elseend">
+          <h1>{{end.name}}</h1>
+        </div>
+        <ng-template #elseend>
+          <p (click)="goToSearchEnd()">+</p>
+        </ng-template>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab bottom>
+    <ion-row text-center>
+      <ion-col>
+        <ion-button (click)="saveIntinerary()" shape="round">Ajouter ce parcours</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-fab>
 </ion-content>

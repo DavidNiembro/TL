@@ -1,36 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header><ion-toolbar>  
+  <ion-grid>
+    <ion-row>
+      <ion-col>    
+        <h1>Bonjour</h1>  
+        <h1>David Niembro</h1>               
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <ul>
-    <li>
-        <ion-card (click)="goToItinerary()">
-            <ion-card-header>
-              <ion-card-subtitle>Ajouter un itinéraire</ion-card-subtitle>
-              <ion-card-title></ion-card-title>
-            </ion-card-header>
-          </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          <ion-card-title>LEB</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          <ion-card-title>Settings</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </li>
-  </ul>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+  <ion-list>
+    <ion-card *ngFor="let it of itineraries" (click)="goToPageItinerary(it.id)">
+      <ion-card-header>
+        <ion-card-subtitle>De -> vers</ion-card-subtitle>
+        <ion-card-title>{{it.stations[0].name}}</ion-card-title>
+        <ion-card-title>{{it.stations[1].name}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToItinerary()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

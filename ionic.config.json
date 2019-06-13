@@ -1,7 +1,8 @@
 {
   "name": "TL2.0",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>itinerary</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <h1>{{itinerary.stations[0].name}}</h1>
+  <h1>{{itinerary.stations[1].name}}</h1>
+  <ion-card *ngFor="let con of connections">
+    <ion-card-header>
+      <ion-card-subtitle>{{con.from.departure}}</ion-card-subtitle>
+      <ion-card-title>{{con.from.departure| date: 'dd/MM/yyyy H:mm' }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

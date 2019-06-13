@@ -1,28 +1,52 @@
 import { Storage } from '@ionic/storage';
-import { Line } from '../app/models/line';
-
+import {Injectable} from '@angular/core';
+import { Itinerary } from './../app/models/itinerary'
+@Injectable()
 export class DataProvider {
+    private storage: Storage
 
-   public lines: Line[];
-
-   constructor() {
-    this.init();
-}
-   init() {
-       this.lines = [];
-       let f = new Line('23','maillefers');
-       this.lines.push(f);
-       console.log(this.lines);
-       
+   constructor( storage: Storage) {
+    this.storage = storage
    }
-   public store(){
-    //this.storage.set('lines', this.lines)
+   public save(itinerary){
+        this.storage.get('Itineraries').then((Itineraries)=>{
+           if(Itineraries){
+            Itineraries.push(itinerary)
+             this.storage.set('Itineraries',Itineraries)
+           }else{
+               let Itineraries = []
+            Itineraries.push(itinerary)
+            this.storage.set('Itineraries',Itineraries)
+           } 
+       })
    }
-  
-   public reload(){
-       //this.storage.get('lines').then((data)=>{
-        //   this.lines = data;
-       //})
+   load(){
+    return this.storage.get('Itineraries');
    }
    
+    storeNewID(ItinerariesID){
+            if(ItinerariesID>=0){
+                ItinerariesID = ItinerariesID + 1
+            }else{
+                ItinerariesID = 0
+            }
+            return this.storage.set('ItinerariesID',ItinerariesID)
+    }
+    public getNewID(){
+        return this.storage.get('ItinerariesID').then((ItinerariesID)=>{
+            return this.storeNewID(ItinerariesID).then(()=>{
+                return this.storage.get('ItinerariesID');
+            })
+        })
+    }
+    public find(id){
+        return this.storage.get('Itineraries').then((Itineraries)=>{
+            return new Promise<any>((resolve, reject) => {
+                Itineraries.forEach((itinerary) => {
+                    if (itinerary.id == id) resolve(itinerary)
+                })
+                reject('Flower #' + id + ' not found')
+            })
+        })
+    }
 }

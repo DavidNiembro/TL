@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
-import {ModalController} from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-search',
@@ -16,17 +16,16 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
-    this.search('');
+    this.search(null);
   }
 
 
   async search(event) {
-    if(event!= "" || event.srcElement.value!=""){
+    if(event!= null || event.srcElement.value!=""){
       const loading = await this.loadingController.create();
       //await loading.present();
       await this.api.getBusStationById(event.srcElement.value)
         .subscribe(res => {
-          console.log(res);
           this.stations = res.stations;
           //loading.dismiss();
         }, err => {

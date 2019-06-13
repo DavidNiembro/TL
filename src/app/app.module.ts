@@ -12,14 +12,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import {SearchPage} from './search/search.page';
 
+import { IonicStorageModule } from '@ionic/storage';
+import { DataProvider } from 'src/providers/data';
+
+
 @NgModule({
   declarations: [AppComponent,SearchPage],
   entryComponents: [SearchPage],
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    DataProvider
   ],
   bootstrap: [AppComponent]
 })

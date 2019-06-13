@@ -1,3 +1,16 @@
 ul {
     list-style-type: none;
 }
+h1{
+    font-size: 40px;
+    font-family: "Poppins-Light";
+    margin-left: 20px;
+    line-height: 40px;
+}
+.header-ios ion-toolbar:last-child{
+    --border-width:0 0 0
+}
+ion-card-title{
+    font-size: 20px;
+    font-family: "Poppins-Light";
+}

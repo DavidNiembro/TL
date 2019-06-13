@@ -41,4 +41,10 @@ export class RestApiService {
       map(this.extractData),
       catchError(this.handleError));
   }
+  getConnection(from: string, to: string): Observable<any> {
+    const url = `${apiUrl}connections?from=${from}&to=${to}`;
+    return this.http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
 }
