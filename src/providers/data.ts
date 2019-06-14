@@ -5,10 +5,10 @@ import { Itinerary } from './../app/models/itinerary'
 export class DataProvider {
     private storage: Storage
 
-   constructor( storage: Storage) {
-    this.storage = storage
-   }
-   public save(itinerary){
+    constructor( storage: Storage) {
+        this.storage = storage
+    }
+    public save(itinerary){
         this.storage.get('Itineraries').then((Itineraries)=>{
            if(Itineraries){
             Itineraries.push(itinerary)
@@ -19,10 +19,10 @@ export class DataProvider {
             this.storage.set('Itineraries',Itineraries)
            } 
        })
-   }
-   load(){
-    return this.storage.get('Itineraries');
-   }
+    }
+    load(){
+        return this.storage.get('Itineraries');
+    }
    
     storeNewID(ItinerariesID){
             if(ItinerariesID>=0){
@@ -47,6 +47,18 @@ export class DataProvider {
                 })
                 reject('Flower #' + id + ' not found')
             })
+        })
+    }
+    public delete(id){
+        return this.storage.get('Itineraries').then((Itineraries)=>{
+            let test=[]
+            Object.keys(Itineraries).forEach( (index) => {
+                if(Itineraries[index].id!=id){
+                    test.push(Itineraries[index])
+                }
+            });
+            this.storage.set('Itineraries',test);
+
         })
     }
 }

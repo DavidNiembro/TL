@@ -14,6 +14,7 @@ import {SearchPage} from './search/search.page';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { DataProvider } from 'src/providers/data';
+import { Network } from '@ionic-native/network/ngx';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DataProvider } from 'src/providers/data';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
-    DataProvider
+    DataProvider,
+    Network
   ],
   bootstrap: [AppComponent]
 })

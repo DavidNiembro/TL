@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import {SearchPage} from '../search/search.page';
 import { OverlayEventDetail } from '@ionic/core';
 import { Storage } from '@ionic/storage';
@@ -17,9 +17,13 @@ export class AddItineraryPage {
   public start : object;
   public end : object;
   public data: DataProvider;
+  public navCtrl: NavController;
+  public isDisable: boolean
 
-  constructor(public modalController: ModalController,private router :Router, private storage: Storage) { 
+  constructor(public modalController: ModalController,private router :Router, private storage: Storage, navCtrl: NavController) { 
     this.data = new DataProvider(storage);
+    this.navCtrl = navCtrl;
+    this.isDisable=true;
   }
   
   async goToSearch() {
@@ -33,8 +37,8 @@ export class AddItineraryPage {
         this.start = detail.data;
       }
     });
+    this.buttonShouldBeDisable()
     return await modal.present();
-
   }
 
   async goToSearchEnd() {
@@ -46,15 +50,19 @@ export class AddItineraryPage {
         this.end = detail.data;
       }
     });
+    this.buttonShouldBeDisable()
     return await modal.present();
 
+  }
+  buttonShouldBeDisable(){
+    this.isDisable = this.start && this.end ? true : false
   }
 
   saveIntinerary(){
     if(this.start&&this.end){
       this.data.getNewID().then((id)=>{
           this.data.save(new Itinerary(id,[this.start,this.end],false))
-          this.router.navigate(['/']);
+          this.router.navigateByUrl('/');
       })
     }
   }

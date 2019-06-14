@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataProvider } from '../../providers/data';
 import { RestApiService } from '../rest-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-itinerary',
@@ -15,7 +16,7 @@ export class ItineraryPage implements OnInit {
   public itinerary: any;
   public connections: any;
 
-  constructor(public api: RestApiService, activatedRoute: ActivatedRoute, data: DataProvider) { 
+  constructor(public api: RestApiService, activatedRoute: ActivatedRoute, data: DataProvider, private router :Router) { 
     this.data = data
     this.route = activatedRoute
   }
@@ -33,10 +34,33 @@ export class ItineraryPage implements OnInit {
       await this.api.getConnection(itinerary.stations[0].name,itinerary.stations[1].name)
         .subscribe(res => {
           this.connections = res.connections;
-          console.log(res)
+          console.log(res.connections[0].sections)
         }, err => {
           console.log(err);
         });
     
   }
+  doRefresh(event) {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.data.find(id).then((itinerary) => {
+      this.itinerary = itinerary
+      this.search(itinerary);
+      event.target.complete();
+    });
+    
+   }
+   swapDirections(){
+     
+   }
+   remove(){
+    let id = this.route.snapshot.paramMap.get('id');
+    this.data.delete(id);
+    this.router.navigateByUrl('/');
+
+    }
+    goToDetails(data){
+        this.router.navigate(['/detail'], {
+            queryParams: data,
+        });
+    }
 }

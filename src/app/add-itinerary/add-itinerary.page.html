@@ -17,9 +17,9 @@
   <ion-row>
     <ion-col>
       <div class="ion-text-center">
-        <h2>Depuis</h2>
+        <h3>Depuis</h3>
         <div *ngIf = " start ; else elsestart">
-            <h1>{{start.name}}</h1>
+            <h2>{{start.name}}</h2>
         </div>
         <ng-template #elsestart>
           <p (click)="goToSearch()">+</p>
@@ -30,9 +30,9 @@
   <ion-row>
     <ion-col>
       <div class="ion-text-center">
-        <h2>Vers</h2>
+        <h3>Vers</h3>
         <div *ngIf = "end; else elseend">
-          <h1>{{end.name}}</h1>
+          <h2>{{end.name}}</h2>
         </div>
         <ng-template #elseend>
           <p (click)="goToSearchEnd()">+</p>
@@ -44,7 +44,7 @@
   <ion-fab bottom>
     <ion-row text-center>
       <ion-col>
-        <ion-button (click)="saveIntinerary()" shape="round">Ajouter ce parcours</ion-button>
+        <ion-button (click)="saveIntinerary()" shape="round" disabled={{isDisable}} >Ajouter ce parcours</ion-button>
       </ion-col>
     </ion-row>
   </ion-fab>

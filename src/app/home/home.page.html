@@ -1,13 +1,11 @@
-<ion-header><ion-toolbar>  
-  <ion-grid>
-    <ion-row>
-      <ion-col>    
-        <h1>Bonjour</h1>  
-        <h1>David Niembro</h1>               
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>  
+      <ion-buttons slot="end">
+          <ion-icon name="settings" (click)="goToSettings()"></ion-icon>
+      </ion-buttons>
+          <h1>Bonjour</h1>  
+          <h1>David Niembro</h1>               
+  </ion-toolbar>
 </ion-header>
 
 
@@ -18,8 +16,9 @@
   <ion-list>
     <ion-card *ngFor="let it of itineraries" (click)="goToPageItinerary(it.id)">
       <ion-card-header>
-        <ion-card-subtitle>De -> vers</ion-card-subtitle>
+        <ion-card-subtitle>De - vers</ion-card-subtitle>
         <ion-card-title>{{it.stations[0].name}}</ion-card-title>
+        <div class="trait"></div>
         <ion-card-title>{{it.stations[1].name}}</ion-card-title>
       </ion-card-header>
     </ion-card>

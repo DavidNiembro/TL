@@ -37,4 +37,7 @@ export class SearchPage implements OnInit {
   add(station){
        this.modalController.dismiss(station);
   }
+  closeModal(){
+    this.modalController.dismiss();
+}
 }
