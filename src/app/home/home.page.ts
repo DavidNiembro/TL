@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataProvider } from '../../providers/data'
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx'
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,12 +13,17 @@ export class HomePage  {
   public itineraries: Object;
   public data: DataProvider;
 
-  constructor(private router :Router, data: DataProvider){
+
+  constructor(
+    private router :Router, 
+    data: DataProvider,
+    ){
     this.data = data
     this.data.load().then(data=>{
       this.itineraries = data;
     });
   }
+  
   ionViewWillEnter() {
     this.data.load().then(data=>{
       this.itineraries = data;
@@ -39,9 +45,4 @@ export class HomePage  {
       event.target.complete();
     })
   }
-
-
-
-
-
 }

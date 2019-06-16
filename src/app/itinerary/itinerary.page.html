@@ -19,12 +19,16 @@
         <ion-grid>
             <ion-row>
               <ion-col size=4>
-                  <ion-card-subtitle>{{con.from.departure| date: 'dd MMM'}}</ion-card-subtitle>
+                  <ion-card-subtitle>{{con.from.departure| date: 'dd MMM'}} </ion-card-subtitle>
                   <ion-card-title>{{con.from.departure| date: 'H : mm' }}</ion-card-title>
               </ion-col>
               <ion-col>
+                  <ion-card-subtitle>Arrêt à {{ con.distance}} m</ion-card-subtitle>
                   <ion-chip outline="true" color="primary" *ngFor="let sec of con.sections">
-                      <ion-label> {{sec&&sec.journey ? sec.journey.category : 'marche'}}</ion-label>
+                      <ion-label> 
+                        {{ sec && sec.walk ? 'Marche': sec.journey.category === 'BUS' ? 'BUS': ''}} 
+                        {{ sec && sec.walk ? '': sec.journey.category === 'BUS' ? ' N°' + sec.journey.number : sec.journey.number}} 
+                      </ion-label>
                     </ion-chip>
               </ion-col>
             </ion-row>

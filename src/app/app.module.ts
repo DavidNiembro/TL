@@ -15,6 +15,8 @@ import {SearchPage} from './search/search.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { DataProvider } from 'src/providers/data';
 import { Network } from '@ionic-native/network/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 
 @NgModule({
@@ -24,9 +26,11 @@ import { Network } from '@ionic-native/network/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     DataProvider,
-    Network
+    Network,
+    Geolocation,
+    NativeGeocoder,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent]
 })
