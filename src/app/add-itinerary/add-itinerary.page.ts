@@ -6,6 +6,7 @@ import { OverlayEventDetail } from '@ionic/core';
 import { Storage } from '@ionic/storage';
 import { DataProvider } from '../../providers/data'
 import { Itinerary } from '../models/itinerary';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-itinerary',
@@ -20,8 +21,8 @@ export class AddItineraryPage {
   public navCtrl: NavController;
   public isDisable: boolean
 
-  constructor(public modalController: ModalController,private router :Router, private storage: Storage, navCtrl: NavController) { 
-    this.data = new DataProvider(storage);
+  constructor(public modalController: ModalController,private router :Router, private storage: Storage,private httpClient: HttpClient, navCtrl: NavController) { 
+    this.data = new DataProvider(storage,httpClient);
     this.navCtrl = navCtrl;
     this.isDisable=true;
   }

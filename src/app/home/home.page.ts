@@ -8,27 +8,46 @@ import { Network } from '@ionic-native/network/ngx'
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage  {
+export class HomePage {
   
   public itineraries: Object;
   public data: DataProvider;
-
 
   constructor(
     private router :Router, 
     data: DataProvider,
     ){
     this.data = data
-    this.data.load().then(data=>{
-      this.itineraries = data;
-    });
+
+    
   }
+  ionViewWillEnter(){
+    this.loadItineraries()
+    this.loadUser()
+  }
+
+  private loadItineraries(): Promise<string> {
+    return new Promise<string> ((resolve, reject) => {
+        this.data.loadItinerariesFromStorage().then(() => {
+                resolve('Ok')
+        }).catch(() => {
+            reject('Ko')
+        })
+    })
+  }
+
+
   
-  ionViewWillEnter() {
-    this.data.load().then(data=>{
-      this.itineraries = data;
-    });
+  private loadUser(): Promise<string> {
+    return new Promise<string> ((resolve, reject) => {
+        this.data.loadUserFromStorage().then(() => {
+                resolve('Ok')
+        }).catch(() => {
+            reject('Ko')
+        })
+    })
   }
+
   
   goToItinerary(){
     this.router.navigate(['/add-itinerary']);
@@ -39,10 +58,16 @@ export class HomePage  {
   goToSettings(){
     this.router.navigate(['/settings']);
   }
-  doRefresh(event) {
-    this.data.load().then(data=>{
-      this.itineraries = data;
-      event.target.complete();
+  doRefresh(event): Promise<string>  {
+    return new Promise<string> ((resolve, reject) => {
+      this.data.loadItinerariesFromStorage().then(() => {
+        event.target.complete();
+        resolve('Ok')
+      }).catch(() => {
+          console.log('load.reject');
+          event.target.complete();
+          reject('Ko')
+      })
     })
   }
 }

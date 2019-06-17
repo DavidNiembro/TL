@@ -14,13 +14,13 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-  <ion-card *ngFor="let con of connections" (click)="goToDetails(con)">
+  <ion-card *ngFor="let con of data.schedules" (click)="goToDetails(con)">
     <ion-card-header>
         <ion-grid>
             <ion-row>
               <ion-col size=4>
-                  <ion-card-subtitle>{{con.from.departure| date: 'dd MMM'}} </ion-card-subtitle>
-                  <ion-card-title>{{con.from.departure| date: 'H : mm' }}</ion-card-title>
+                  <ion-card-subtitle>{{con && con.from.departure| date: 'dd MMM'}} </ion-card-subtitle>
+                  <ion-card-title>{{con && con.from.departure| date: 'H : mm' }}</ion-card-title>
               </ion-col>
               <ion-col>
                   <ion-card-subtitle>Arrêt à {{ con.distance}} m</ion-card-subtitle>

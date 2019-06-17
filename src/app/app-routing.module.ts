@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'itinerary/:id', loadChildren: './itinerary/itinerary.module#ItineraryPageModule' },
   { path: 'detail', loadChildren: './detail-itinerary/detail-itinerary.module#DetailItineraryPageModule' },
+  { path: 'change-name', loadChildren: './change-name/change-name.module#ChangeNamePageModule' },
 ];
 
 @NgModule({

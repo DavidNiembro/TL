@@ -4,7 +4,7 @@
           <ion-icon name="settings" (click)="goToSettings()"></ion-icon>
       </ion-buttons>
           <h1>Bonjour</h1>  
-          <h1>David Niembro</h1>       
+          <h1>{{data.user && data.user.firstname}} {{ data.user && data.user.lastname}}</h1>       
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
   <ion-list>
-    <ion-card *ngFor="let it of itineraries" (click)="goToPageItinerary(it.id)">
+    <ion-card *ngFor="let it of data.itineraries" (click)="goToPageItinerary(it.id)">
       <ion-card-header>
         <ion-card-subtitle>De - vers</ion-card-subtitle>
         <ion-card-title>{{it.stations[0].name}}</ion-card-title>

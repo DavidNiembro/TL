@@ -25,11 +25,6 @@ export class ItineraryPage implements OnInit {
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.data.find(id).then((itinerary) => {
-      this.itinerary = itinerary
-      this.search(itinerary);
-    });
     this.geolocation.getCurrentPosition().then((resp) => {
       this.coordonnees = resp.coords
      }).catch((error) => {
@@ -37,6 +32,28 @@ export class ItineraryPage implements OnInit {
      });
     
   }
+  ionViewWillEnter(){
+    let id = this.route.snapshot.paramMap.get('id');
+    this.data.find(id).then((itinerary) => {
+      this.itinerary = itinerary
+      this.load(itinerary)
+    });
+    
+  }
+  private load(itinerary): Promise<string> {
+    return new Promise<string> ((resolve, reject) => {
+        this.data.loadScheduleFromAPI(itinerary.stations[0].name,itinerary.stations[1].name).then(() => {
+            this.data.loadScheduleFromStorage().then(() => {
+                console.log('load.resolve');
+                resolve('Ok')
+            })
+        }).catch(() => {
+            this.data.loadScheduleFromStorage()
+            console.log('load.reject');
+            reject('Ko')
+        })
+    })
+}
   get_distance_m(lat1, lng1, lat2, lng2) {
       let earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
       let rlo1 = this.deg2rad(lng1);
@@ -60,12 +77,10 @@ export class ItineraryPage implements OnInit {
       await this.api.getConnection(itinerary.stations[0].name,itinerary.stations[1].name)
         .subscribe(res => {
           this.connections = res.connections;
-          console.log(res.connections);
           res.connections.forEach(element => {
             let lat1 =element.sections[0].departure.location.coordinate.x;
             let lng1 =element.sections[0].departure.location.coordinate.y;
             element.distance=this.get_distance_m(lat1,lng1,this.coordonnees,this.coordonnees);
-          console.log(this.get_distance_m(lat1,lng1,this.coordonnees,this.coordonnees));
           });
         }, err => {
           console.log(err);
@@ -76,7 +91,7 @@ export class ItineraryPage implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.data.find(id).then((itinerary) => {
       this.itinerary = itinerary
-      this.search(itinerary);
+      this.load(itinerary)
       event.target.complete();
     });
     
