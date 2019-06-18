@@ -23,7 +23,7 @@
                   <ion-card-title>{{con && con.from.departure| date: 'H : mm' }}</ion-card-title>
               </ion-col>
               <ion-col>
-                  <ion-card-subtitle>Arrêt à {{ con.distance}} m</ion-card-subtitle>
+                  <ion-card-subtitle>Arrêt à {{ con.distance}}</ion-card-subtitle>
                   <ion-chip outline="true" color="primary" *ngFor="let sec of con.sections">
                       <ion-label> 
                         {{ sec && sec.walk ? 'Marche': sec.journey.category === 'BUS' ? 'BUS': ''}} 
