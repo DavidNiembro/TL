@@ -50,12 +50,12 @@ export class ItineraryPage implements OnInit {
 
   private load(itinerary): Promise<string> {
     return new Promise<string> ((resolve, reject) => {
-        this.data.loadScheduleFromAPI(itinerary.stations[0].name,itinerary.stations[1].name).then(() => {
-            this.data.loadScheduleFromStorage().then(() => {
+        this.data.loadScheduleFromAPI(itinerary).then(() => {
+            this.data.loadScheduleFromStorage(itinerary.id).then(() => {
                 resolve('Ok')
             })
         }).catch(() => {
-            this.data.loadScheduleFromStorage()
+            this.data.loadScheduleFromStorage(itinerary.id)
             reject('Ko')
         })
     })
@@ -63,7 +63,6 @@ export class ItineraryPage implements OnInit {
 
   doRefresh(event) {
    
-      
       this.load(this.itinerary).then(()=>{
         this.data.schedules.forEach(element => {
           let lat1 = element.sections[0].departure.location.coordinate.x;

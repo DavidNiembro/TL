@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button text="Retour">
@@ -11,17 +11,17 @@
 
 <ion-content>
     <ion-card>
-      <ion-item (click)="goToChangeName()">
+      <ion-item (click)="goToChangeName()" mode="ios">
         <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Changer le nom</ion-label>
         <ion-icon name="arrow-dropright"></ion-icon>
       </ion-item>
     </ion-card>
     <ion-card>
-      <ion-item>
+      <ion-item mode="ios">
         <ion-icon name="moon" slot="start"></ion-icon>
         <ion-label>Dark mode</ion-label>
-        <ion-toggle color="primary"></ion-toggle>
+        <ion-toggle mode="ios" color="primary"></ion-toggle>
       </ion-item>
     </ion-card>
 </ion-content>

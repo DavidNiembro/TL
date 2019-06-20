@@ -16,6 +16,8 @@ export class DataProvider {
     public user: User
     public schedules: Schedule[]
     private httpClient: HttpClient
+    public lastUpdateTime: Date
+    public lastUpdateSuccess: boolean
 
 
     constructor( storage: Storage, httpClient: HttpClient) {
@@ -23,19 +25,68 @@ export class DataProvider {
         this.storage = storage
         this.itineraries = []
         this.schedules = []
-        this.user = new User('','');
+        this.user = new User('','')
+        this.lastUpdateTime = null
+        this.lastUpdateSuccess = false
     }
-    public loadScheduleFromAPI(from,to): Promise<string> {
+    public loadScheduleFromAPI(itinerary): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.schedules = []
-            this.httpClient.get(this.apiurl + `connections?from=${from}&to=${to}`).subscribe(
-                data => { // API is responding, let's do it
-                    this.storage.set('schedules', data).then(() => {
-                            console.log('data from API stored')
-                            resolve('Ok')
+            this.httpClient.get(this.apiurl + `connections?from=${itinerary.stations[0].name}&to=${itinerary.stations[1].name}`).subscribe(
+                data => { 
+                    
+                    // API is responding, let's do it
+                    let schedule = new Object;
+                    schedule['id'] = itinerary.id
+                    schedule['data'] = data
+                    this.storage.get('schedules').then((sche) => {
+                        if(sche){
+                            let schArray=[]
+                            sche.forEach((sh,index) => {
+                                if(sh.id == itinerary.id){
+                                    schArray.push(schedule)
+                                }else{
+                                    schArray.push(sh)
+                                }
+                            });
+                            let flag = 0
+                            schArray.forEach((sh,index) => {
+                                if(sh.id == itinerary.id){
+                                    flag++
+                                }
+                            });
+                            if(!flag){
+                                    schArray.push(schedule)
+                            }
+                            this.storage.set('schedules', schArray).then(() => {
+                                this.lastUpdateSuccess = true
+                                this.lastUpdateTime = new Date()
+                                this.storage.set('lastUpdateTime', this.lastUpdateTime).then(() => {
+                                    console.log('data from API stored')
+                                    resolve('Ok')
+                                })
+                            })
+                        }else{
+                            console.log('sche vide')
+                            let sche= [];
+                            sche.push(schedule);
+                            this.storage.set('schedules', sche).then(() => {
+                                this.lastUpdateSuccess = true
+                                this.lastUpdateTime = new Date()
+                                this.storage.set('lastUpdateTime', this.lastUpdateTime).then(() => {
+                                    console.log('data from API stored')
+                                    resolve('Ok')
+                                })
+                            })
+                        }
                     })
+                    
                 },
                 err => {
+                    this.storage.get('lastUpdateTime').then((value) => {
+                        this.lastUpdateTime = value
+                    })
+                    this.lastUpdateSuccess = false
                     console.log('Load from API failed with error ' + err.message)
                     reject('API call failed')
                 }
@@ -44,16 +95,17 @@ export class DataProvider {
     }
 
     // Convert the json format stored in storage to array of Flower objects
-    public loadScheduleFromStorage(): Promise<string> {
+    public loadScheduleFromStorage(id): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.schedules = []
             this.storage.get('schedules').then((data) => {
-                data.connections.forEach((value) => {
-                    console.log(value)
-                    var sh = new Schedule(value.from,value.sections,value.to);
-                    //var f = new Schedule(value.id, stringnames)
-                    //f.size = value.size
-                   this.schedules.push(sh)
+                data.forEach((it) => {
+                    if(it.id==id){
+                        it.data.connections.forEach((value) => {
+                            var sh = new Schedule(value.from,value.sections,value.to);
+                            this.schedules.push(sh)
+                        })
+                    }
                 })
                 console.log('loadFromStorage.resolve');
                 resolve('Ok')

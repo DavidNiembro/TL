@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
       <ion-title>
         <h1>Chercher un arrêt</h1>
@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let station of stations">
+  <ion-searchbar mode="ios" (ionInput)="search($event)"></ion-searchbar>
+  <ion-list mode="ios">
+    <ion-item  *ngFor="let station of stations">
       <ion-label (click)="add(station)" >{{station.name}}</ion-label>
     </ion-item>
   </ion-list>

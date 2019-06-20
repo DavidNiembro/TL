@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
       <ion-buttons slot="start">
           <ion-back-button text="Retour">
@@ -11,10 +11,11 @@
   <h1>{{itinerary && itinerary.stations[0].name}}</h1>
   <div class="trait"></div>
   <h1>{{itinerary && itinerary.stations[1].name}}</h1>
+  Last update: {{ data.lastUpdateTime | date: 'dd/MM/yyyy HH:mm:ss' }}, success: {{ data.lastUpdateSuccess }}
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-  <ion-card *ngFor="let con of data.schedules" (click)="goToDetails(con)">
+  <ion-card *ngFor="let con of data.schedules">
     <ion-card-header>
         <ion-grid>
             <ion-row>

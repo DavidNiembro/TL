@@ -27,6 +27,6 @@ export class Itinerary {
     }
 
     setFavorite(favorite){
-        this.favorite= favorite
+        this.favorite = favorite
     }
 }
