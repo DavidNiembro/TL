@@ -17,6 +17,7 @@ import { DataProvider } from 'src/providers/data';
 import { Network } from '@ionic-native/network/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { NetworkStatus } from 'src/app/connection';
 
 
 @NgModule({
@@ -27,9 +28,11 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     StatusBar,
     SplashScreen,
     DataProvider,
+    NetworkStatus,
     Network,
     Geolocation,
     NativeGeocoder,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
   ],
   bootstrap: [AppComponent]

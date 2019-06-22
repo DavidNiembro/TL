@@ -1,7 +1,5 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-@import "theme.light";
-@import "theme.dark";
 
 @font-face {
   font-family: 'Poppins-Bold';
@@ -17,6 +15,8 @@
 }
 /** Ionic CSS Variables **/
 :root {
+
+  --ion-toolbar-background: --ion-color-dark;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

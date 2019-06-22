@@ -1,29 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from '../../providers/data'
 import { Router } from '@angular/router';
-import { Network } from '@ionic-native/network/ngx'
+import { NetworkStatus } from '../connection'
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+
+
 export class HomePage {
   
   public itineraries: Object;
   public data: DataProvider;
+  public networkProvider: NetworkStatus;
+  public networkStatus: Boolean;
 
   constructor(
     private router :Router, 
     data: DataProvider,
+    networkProvider: NetworkStatus,
+    private theme: ThemeService
     ){
     this.data = data
-
+    this.networkProvider = networkProvider
     
   }
   ionViewWillEnter(){
     this.loadItineraries()
     this.loadUser()
+    this.networkStatus = this.networkProvider.getStatus()
+
   }
 
   private loadItineraries(): Promise<string> {
@@ -36,8 +46,6 @@ export class HomePage {
     })
   }
 
-
-  
   private loadUser(): Promise<string> {
     return new Promise<string> ((resolve, reject) => {
         this.data.loadUserFromStorage().then(() => {
@@ -48,7 +56,6 @@ export class HomePage {
     })
   }
 
-  
   goToItinerary(){
     this.router.navigate(['/add-itinerary']);
   }

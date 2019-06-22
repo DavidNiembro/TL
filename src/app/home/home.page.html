@@ -1,10 +1,14 @@
 <ion-header mode="ios">
   <ion-toolbar>  
       <ion-buttons slot="end">
+          <ion-chip color="danger" *ngIf="!networkStatus">
+                  <ion-icon name="ios-wifi"></ion-icon>
+              <ion-label>offline</ion-label>
+            </ion-chip>
           <ion-icon name="settings" (click)="goToSettings()"></ion-icon>
       </ion-buttons>
-          <h1>Bonjour</h1>  
-          <h1>{{data.user && data.user.firstname}} {{ data.user && data.user.lastname}}</h1>       
+          <h1 class="ion-title">Bonjour</h1>  
+          <h1>{{data.user && data.user.firstname}} {{ data.user && data.user.lastname}}</h1>      
   </ion-toolbar>
 </ion-header>
 

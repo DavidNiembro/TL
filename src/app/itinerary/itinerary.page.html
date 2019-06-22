@@ -11,7 +11,15 @@
   <h1>{{itinerary && itinerary.stations[0].name}}</h1>
   <div class="trait"></div>
   <h1>{{itinerary && itinerary.stations[1].name}}</h1>
-  Last update: {{ data.lastUpdateTime | date: 'dd/MM/yyyy HH:mm:ss' }}, success: {{ data.lastUpdateSuccess }}
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            Dernière mise à jour le {{ data.lastUpdateTime | date: 'dd MMMM HH:mm' }}
+          </div>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
