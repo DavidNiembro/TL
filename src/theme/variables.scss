@@ -1,8 +1,24 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+@font-face {
+  font-family: 'Poppins-Bold';
+  font-style: normal;
+  font-weight: Bold;
+  src: url('../assets/fonts/Poppins-Bold.ttf');
+}
+@font-face {
+  font-family: 'Poppins-Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Poppins-ExtraLight.ttf');
+}
 /** Ionic CSS Variables **/
 :root {
+
+  --ion-toolbar-background: --ion-color-dark;
+  --ion-item-border-color: transparent;
+  --ion-color-step-600:--ion-color-dark;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -74,4 +90,8 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+ 
+  --ion-font-family: 'Poppins-Bold';
+  --ion-font-family: 'Poppins-Light';
 }

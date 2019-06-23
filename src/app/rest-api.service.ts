@@ -35,8 +35,14 @@ export class RestApiService {
     return body || { };
   }
 
-  getClassroomById(id: string): Observable<any> {
-    const url = `${apiUrl}locations?query=${id.srcElement.value}&type=station`;
+  getBusStationById(id: string): Observable<any> {
+    const url = `${apiUrl}locations?query=${id}&type=station`;
+    return this.http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+  getConnection(from: string, to: string): Observable<any> {
+    const url = `${apiUrl}connections?from=${from}&to=${to}`;
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));

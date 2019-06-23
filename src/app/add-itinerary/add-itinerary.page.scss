@@ -1,0 +1,30 @@
+h1{
+    font-size: 50px;
+}
+h2{
+    font-weight: bold;
+    font-size: 25px;
+
+}
+ion-icon {
+    font-size: 70px;
+}
+.header-md:after {
+    background-image: none !important;
+}
+p{
+    font-family: "Poppins-Light";
+    font-size: 30px;
+    font-weight: 100;
+    line-height: 20px;
+
+}
+ion-fab{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+  }
+.header-ios ion-toolbar:last-child{
+    --border-width:0 0 0
+}

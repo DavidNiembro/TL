@@ -1,0 +1,23 @@
+.header-ios ion-toolbar:last-child{
+    --border-width:0 0 0
+}
+h1{
+    font-size: 40px;
+    font-family: "Poppins-Light";
+    margin-left: 20px;
+    line-height: 40px;
+}
+.version{
+    position: absolute;
+    bottom: 0px;
+    margin-left: auto;
+    padding-left: 10px;
+    margin-right: auto;
+}
+.versionName{
+    position: absolute;
+    bottom: 25px;
+    margin-left: auto;
+    padding-left: 10px;
+    margin-right: auto;
+}

@@ -1,0 +1,38 @@
+<ion-header mode="ios">
+    <ion-toolbar>
+      <ion-row>
+          <ion-buttons >
+              <ion-back-button text="Retour">
+              </ion-back-button>
+            </ion-buttons>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+          <h1>Réglages</h1>  
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+  
+
+<ion-content>
+    <ion-card>
+      <ion-item (click)="goToChangeName()" mode="ios">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Changer le nom</ion-label>
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item mode="ios">
+        <ion-icon name="moon" slot="start"></ion-icon>
+        <ion-label>Theme</ion-label>
+        <ion-button color="primary" (click)="changeTheme(false)">dark</ion-button>
+        <ion-button color="primary" (click)="changeTheme(true)">light</ion-button>
+      </ion-item>
+    </ion-card>
+    <ion-text>
+        <p class="version">Version 1.0</p>
+        <p class="versionName">Crée par David Niembro</p>
+      </ion-text>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "appId": "ch.cpnv.tln",
+  "appName": "TL2.0",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

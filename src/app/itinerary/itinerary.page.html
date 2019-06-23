@@ -1,0 +1,55 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="Retour">
+          </ion-back-button>
+        </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>{{itinerary && itinerary.stations[0].name}}</h1>
+  <div class="trait"></div>
+  <h1>{{itinerary && itinerary.stations[1].name}}</h1>
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            Dernière mise à jour le {{ data.lastUpdateTime | date: 'dd MMMM HH:mm' }}
+          </div>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <ion-card *ngFor="let con of data.schedules">
+    <ion-card-header>
+        <ion-grid>
+            <ion-row>
+              <ion-col size=4>
+                  <ion-card-subtitle>{{con && con.from.departure| date: 'dd MMM'}} </ion-card-subtitle>
+                  <ion-card-title>{{con && con.from.departure| date: 'H : mm' }}</ion-card-title>
+              </ion-col>
+              <ion-col>
+                  <ion-card-subtitle>Arrêt à {{ con.distance}}</ion-card-subtitle>
+                  <ion-chip outline="true" color="primary" *ngFor="let sec of con.sections">
+                      <ion-label> 
+                        {{ sec && sec.walk ? 'Marche': sec.journey.category === 'BUS' ? 'BUS': ''}} 
+                        {{ sec && sec.walk ? '': sec.journey.category === 'BUS' ? ' N°' + sec.journey.number : sec.journey.number}} 
+                      </ion-label>
+                    </ion-chip>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-header>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button><ion-icon name="more"></ion-icon></ion-fab-button>
+    
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="swapDirections()"><ion-icon name="swap"></ion-icon></ion-fab-button>
+        <ion-fab-button (click)="remove()"color="danger"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="Retour">
+          </ion-back-button>
+        </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h1>Choisissez un itinéraire</h1>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h3>Depuis</h3>
+        <div *ngIf = " start ; else elsestart">
+            <h2>{{start.name}}</h2>
+        </div>
+        <ng-template #elsestart>
+          <p (click)="goToSearch()">+</p>
+        </ng-template>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div class="ion-text-center">
+        <h3>Vers</h3>
+        <div *ngIf = "end; else elseend">
+          <h2>{{end.name}}</h2>
+        </div>
+        <ng-template #elseend>
+          <p (click)="goToSearchEnd()">+</p>
+        </ng-template>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab bottom>
+    <ion-row text-center>
+      <ion-col>
+        <ion-button (click)="saveIntinerary()" shape="round" disabled={{isDisable}} >Ajouter ce parcours</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-fab>
+</ion-content>
