@@ -31,22 +31,25 @@ export class SettingsPage implements OnInit {
   buttonTheme: boolean;
 
   constructor(private router :Router, private theme: ThemeService) {
-    this.theme.storedTheme.then((theme)=>{
-      if(theme=='night'){
-        this.buttonTheme = true 
-      }else{
-        this.buttonTheme = false 
-      }
-    })
+    //this.theme.storedThemeName.then((theme)=>{
+     // if(!theme){
+      //  this.buttonTheme = false 
+      //}else{
+      //  this.buttonTheme = theme 
+     // }
+      //console.log(this.buttonTheme)
+      //this.changeTheme()
+    //})
   }
 
-  changeTheme() {
-    if(this.buttonTheme){
-      this.theme.setTheme(themes['night']);
+  changeTheme(bool) {
+    console.log(bool)
+    if(!bool){
+      this.theme.setTheme(themes['night'],true);
     }else{
-      this.theme.setTheme(themes['autumn']);
+      this.theme.setTheme(themes['autumn'],false);
     }
-    this.buttonTheme = !this.buttonTheme
+    //this.buttonTheme = !this.buttonTheme
   }
 
   ngOnInit() {

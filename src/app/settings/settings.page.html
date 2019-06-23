@@ -1,11 +1,17 @@
 <ion-header mode="ios">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button text="Retour">
-            </ion-back-button>
-          </ion-buttons>
+      <ion-row>
+          <ion-buttons >
+              <ion-back-button text="Retour">
+              </ion-back-button>
+            </ion-buttons>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+          <h1>Réglages</h1>  
+        </ion-col>
+      </ion-row>
     </ion-toolbar>
-    <h1>Réglages</h1>  
   </ion-header>
   
 
@@ -20,8 +26,13 @@
     <ion-card>
       <ion-item mode="ios">
         <ion-icon name="moon" slot="start"></ion-icon>
-        <ion-label>Dark mode</ion-label>
-        <ion-toggle mode="ios" color="primary" (ionChange)="changeTheme()" checked="buttonTheme ? true : false"></ion-toggle>
+        <ion-label>Theme</ion-label>
+        <ion-button color="primary" (click)="changeTheme(false)">dark</ion-button>
+        <ion-button color="primary" (click)="changeTheme(true)">light</ion-button>
       </ion-item>
     </ion-card>
+    <ion-text>
+        <p class="version">Version 1.0</p>
+        <p class="versionName">Crée par David Niembro</p>
+      </ion-text>
 </ion-content>

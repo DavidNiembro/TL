@@ -1,12 +1,18 @@
 <ion-header mode="ios">
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button text="Retour">
-          </ion-back-button>
-        </ion-buttons>
-  </ion-toolbar>
-  <h1>Changer le nom</h1> 
-</ion-header>
+    <ion-toolbar>
+      <ion-row>
+          <ion-buttons >
+              <ion-back-button text="Retour">
+              </ion-back-button>
+            </ion-buttons>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+          <h1>Changer le nom</h1>  
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
     <form #form="ngForm" (ngSubmit)="saveName(form)" method="post">
@@ -18,6 +24,6 @@
         <ion-label position="floating">Nom</ion-label>
         <ion-input ngModel value="{{data && data.user && data.user.lastname}}" name="lastname"></ion-input>
       </ion-item>
-      <ion-button expand="block" type="submit">Sauvegarder</ion-button>
+      <ion-button fill="outline" class="buttonSubmit" expand="block" type="submit">Sauvegarder</ion-button>
     </form>
 </ion-content>
