@@ -1,9 +1,63 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-statistiques</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="Retour">
+            </ion-back-button>
+          </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
+    <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <h1>Ajoutez une statistique</h1>
+          </div>
+        </ion-col>
+    </ion-row>
+    <ion-list>
+        <ion-radio-group>
+          <ion-list-header>
+            <ion-label>Le bus était :</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>En retard</ion-label>
+            <ion-radio slot="start" value="late" checked></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>A l'heure</ion-label>
+            <ion-radio slot="start" value="ontime"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>En avance</ion-label>
+            <ion-radio slot="start" value="advance"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <ion-list>
+      <ion-radio-group >
+          <ion-list-header>
+            <ion-label>C'était</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Au départ</ion-label>
+            <ion-radio slot="start" value="late" checked disabled ></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>A l'arrivée</ion-label>
+            <ion-radio slot="start" value="ontime" disabled></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-item>
+          <ion-label position="floating" >Difference (en mintutes)</ion-label>
+          <ion-input type="number" value="33"></ion-input>
+      </ion-item>
+
+      <ion-button color="primary">Ajouter</ion-button>
 
 </ion-content>

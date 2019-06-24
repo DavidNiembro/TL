@@ -1,0 +1,11 @@
+h1{
+    font-size: 50px;
+}
+
+.header-md:after {
+    background-image: none !important;
+}
+
+.header-ios ion-toolbar:last-child{
+    --border-width:0 0 0
+}
