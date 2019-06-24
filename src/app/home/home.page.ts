@@ -65,6 +65,9 @@ export class HomePage {
   goToPageStatistique(id){
     this.router.navigateByUrl('/statistiques/'+ id);
   }
+  addStatistique(id){
+    this.router.navigateByUrl('/add-statistiques/'+ id);
+  }
   goToSettings(){
     this.router.navigate(['/settings']);
   }
