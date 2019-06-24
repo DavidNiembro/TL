@@ -115,6 +115,7 @@ export class DataProvider {
             })
         })
     }
+
     public save(itinerary){
         this.storage.get('Itineraries').then((Itineraries)=>{
            if(Itineraries){
@@ -127,12 +128,13 @@ export class DataProvider {
            } 
        })
     }
+    
     public loadItinerariesFromStorage(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.itineraries = []
             this.storage.get('Itineraries').then((data) => {
                 data.forEach((value) => {
-                    var it = new Itinerary(value.id, value.stations ,value.favorite)
+                    var it = new Itinerary(value.id, value.stations ,value.favorite, value.statistiques)
                     this.itineraries.push(it)
                 })
                 resolve('Ok')
@@ -141,6 +143,7 @@ export class DataProvider {
             })
         })
     }
+
     storeNewID(ItinerariesID){
             if(ItinerariesID>=0){
                 ItinerariesID = ItinerariesID + 1
@@ -149,6 +152,7 @@ export class DataProvider {
             }
             return this.storage.set('ItinerariesID',ItinerariesID)
     }
+    
     public getNewID(){
         return this.storage.get('ItinerariesID').then((ItinerariesID)=>{
             return this.storeNewID(ItinerariesID).then(()=>{
@@ -201,6 +205,20 @@ export class DataProvider {
                 name.lastname = data.lastname
                 this.storage.set('User',name)
             } 
+        })
+    }
+    public saveStatistique(id, statistiques){
+        this.itineraries = []
+        this.storage.get('Itineraries').then((data) => {
+            data.forEach((value) => {
+                if(value.id == id){
+                    value.statistiques.push(statistiques);
+                    this.itineraries.push(value)
+                }else{
+                    this.itineraries.push(value)
+                }
+                this.storage.set('Itineraries',this.itineraries)
+            })
         })
     }
 }

@@ -33,7 +33,6 @@ export class HomePage {
     this.loadItineraries()
     this.loadUser()
     this.networkStatus = this.networkProvider.getStatus()
-
   }
 
   private loadItineraries(): Promise<string> {
@@ -61,6 +60,12 @@ export class HomePage {
   }
   goToPageItinerary(id){
     this.router.navigateByUrl('/itinerary/'+ id);
+  }
+  goToPageStatistique(id){
+    this.router.navigateByUrl('/statistiques/'+ id);
+  }
+  addStatistique(id){
+    this.router.navigateByUrl('/add-statistiques/'+ id);
   }
   goToSettings(){
     this.router.navigate(['/settings']);
