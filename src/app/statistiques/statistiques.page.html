@@ -1,0 +1,29 @@
+<ion-header mode="ios">
+    <ion-toolbar>
+      <ion-row>
+          <ion-buttons >
+              <ion-back-button text="Retour">
+              </ion-back-button>
+            </ion-buttons>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+          <h1>Statistiques</h1>  
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-card mode="ios" *ngFor="let statistique of statistiques">
+        <ion-item >
+          <ion-label> Le {{statistique.time | date: 'dd MMMM HH:mm'}}</ion-label>
+          <ion-label>{{statistique.momentDelayed == 'start' ? "Au départ " : "A l'arrivée"}} </ion-label>
+          <ion-label [color]="statistique.delayed == 'late' ? 'danger' : 'success'" >{{statistique.timeDelayed }} {{statistique.timeDelayed ? 'minutes' : "A l'heure"}} </ion-label>
+        </ion-item>
+        </ion-card>
+    </ion-list>
+      
+
+</ion-content>

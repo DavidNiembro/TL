@@ -62,7 +62,7 @@ export class AddItineraryPage {
   saveIntinerary(){
     if(this.start&&this.end){
       this.data.getNewID().then((id)=>{
-          this.data.save(new Itinerary(id,[this.start,this.end],false))
+          this.data.save(new Itinerary(id,[this.start,this.end],false, new Array))
           this.router.navigateByUrl('/');
       })
     }

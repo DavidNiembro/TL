@@ -18,14 +18,25 @@
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
   <ion-list>
-    <ion-card *ngFor="let it of data.itineraries" (click)="goToPageItinerary(it.id)">
-      <ion-card-header>
-        <ion-card-subtitle>De - vers</ion-card-subtitle>
-        <ion-card-title>{{it.stations[0].name}}</ion-card-title>
-        <div class="trait"></div>
-        <ion-card-title>{{it.stations[1].name}}</ion-card-title>
-      </ion-card-header>
-    </ion-card>
+      <ion-item-sliding #item *ngFor="let it of data.itineraries" >
+        <ion-card>
+          <ion-item>
+            <ion-card-header>
+              <ion-card-subtitle>De - vers</ion-card-subtitle>
+              <ion-card-title>{{it.stations[0].name}}</ion-card-title>
+              <div class="trait"></div>
+              <ion-card-title>{{it.stations[1].name}}</ion-card-title>
+            </ion-card-header>
+            <ion-button (click)="addStatistique(it.id)" slot="end">
+              Ajouter stats
+            </ion-button>
+         </ion-item>
+        </ion-card>
+        <ion-item-options side="start" (ionSwipe)="goToPageStatistique(it.id)">
+        </ion-item-options>
+          <ion-item-options side="end" (ionSwipe)="goToPageItinerary(it.id)">
+          </ion-item-options>
+      </ion-item-sliding>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
