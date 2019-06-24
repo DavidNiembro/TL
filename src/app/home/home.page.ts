@@ -33,7 +33,6 @@ export class HomePage {
     this.loadItineraries()
     this.loadUser()
     this.networkStatus = this.networkProvider.getStatus()
-
   }
 
   private loadItineraries(): Promise<string> {

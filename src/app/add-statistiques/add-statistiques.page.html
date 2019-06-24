@@ -16,20 +16,19 @@
         </ion-col>
     </ion-row>
     <ion-list>
-        <ion-radio-group>
+        <ion-radio-group
+        (ionChange)="selectDelayed($event)">
           <ion-list-header>
             <ion-label>Le bus était :</ion-label>
           </ion-list-header>
           <ion-item>
             <ion-label>En retard</ion-label>
-            <ion-radio slot="start" value="late" checked></ion-radio>
+            <ion-radio slot="start" value="late" ></ion-radio>
           </ion-item>
-      
           <ion-item>
             <ion-label>A l'heure</ion-label>
-            <ion-radio slot="start" value="ontime"></ion-radio>
+            <ion-radio slot="start" value="ontime" checked></ion-radio>
           </ion-item>
-      
           <ion-item>
             <ion-label>En avance</ion-label>
             <ion-radio slot="start" value="advance"></ion-radio>
@@ -37,27 +36,27 @@
         </ion-radio-group>
       </ion-list>
       <ion-list>
-      <ion-radio-group >
+      <ion-radio-group  (ionChange)="selectMomentDelayed($event)">
           <ion-list-header>
             <ion-label>C'était</ion-label>
           </ion-list-header>
           <ion-item>
             <ion-label>Au départ</ion-label>
-            <ion-radio slot="start" value="late" checked disabled ></ion-radio>
+            <ion-radio slot="start" value="start" checked disabled="{{delayed != 'ontime' ? false : true}}" ></ion-radio>
           </ion-item>
       
           <ion-item>
             <ion-label>A l'arrivée</ion-label>
-            <ion-radio slot="start" value="ontime" disabled></ion-radio>
+            <ion-radio slot="start" value="end" disabled="{{delayed != 'ontime' ? false : true}}"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
 
       <ion-item>
           <ion-label position="floating" >Difference (en mintutes)</ion-label>
-          <ion-input type="number" value="33"></ion-input>
+          <ion-input type="number" placeholder="33" (ionInput)="addTimeDelay($event)" disabled="{{delayed != 'ontime' ? false : true}}"></ion-input>
       </ion-item>
 
-      <ion-button color="primary">Ajouter</ion-button>
+      <ion-button color="primary" (click)="addStatistique()">Ajouter</ion-button>
 
 </ion-content>

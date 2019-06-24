@@ -3,19 +3,21 @@ export class Itinerary {
     private id: Number;
     private stations: Object;
     private favorite: boolean;
+    private statistiques: Object;
 
-    constructor(id: Number, stations: Object, favorite: boolean ){
+    constructor(id: Number, stations: Object, favorite: boolean, statistiques: Object ){
         this.id = id
         this.stations = stations;
         this.favorite = favorite;
+        this.statistiques = statistiques;
     }
 
     getStations(){
-        return  this.stations
+        return this.stations
     }
 
     getID(){
-        return  this.id
+        return this.id
     }
 
     setStations(stations){
@@ -29,4 +31,5 @@ export class Itinerary {
     setFavorite(favorite){
         this.favorite = favorite
     }
+
 }
